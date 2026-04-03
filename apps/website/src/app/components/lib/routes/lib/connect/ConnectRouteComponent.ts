@@ -2,16 +2,15 @@
  * Copyright © 2026 Anaïse Louis. All rights reserved.
  */
 
-import { ChangeDetectionStrategy, Component, effect, inject, signal, type WritableSignal }                                                                                                                                                                               from "@angular/core";
-import { Analytics, logEvent }                                                                                                                                                                                                                                           from "@angular/fire/analytics";
-import { addDoc, collection, type CollectionReference, Firestore, FirestoreError, serverTimestamp }                                                                                                                                                                      from "@angular/fire/firestore";
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, type ValidationErrors, Validators }                                                                                                                                                               from "@angular/forms";
-import { AuthenticationService, EllipsesService, ErrorsService, getFirestoreErrorMessage }                                                                                                                                                                               from "@bowstring/core";
-import { AsideComponent, BoxComponent, ButtonComponent, DividerComponent, FlexboxContainerComponent, FormComponent, HeaderComponent, OptionComponent, PhoneNumberFieldInputComponent, PickerInputComponent, SectionComponent, SymbolComponent, TextFieldInputComponent } from "@bowstring/surface";
-import { type CountryCode, getCountries, getCountryCallingCode, isPossiblePhoneNumber, parsePhoneNumberWithError, type PhoneNumber }                                                                                                                                     from "libphonenumber-js";
-import { RouteComponent }                                                                                                                                                                                                                                                from "../../../../";
-import { type MessageDocument }                                                                                                                                                                                                                                          from "../../../../../interfaces";
-import { MessageService }                                                                                                                                                                                                                                                from "../../../../../services";
+import { ChangeDetectionStrategy, Component, effect, inject, signal, type WritableSignal }                                                                                                                                                                                                  from "@angular/core";
+import { addDoc, collection, type CollectionReference, Firestore, FirestoreError, serverTimestamp }                                                                                                                                                                                         from "@angular/fire/firestore";
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, type ValidationErrors, Validators }                                                                                                                                                                                  from "@angular/forms";
+import { AuthenticationService, ErrorsService, getFirestoreErrorMessage }                                                                                                                                                                                                                   from "@bowstring/core";
+import { AsideComponent, BoxComponent, ButtonComponent, DividerComponent, EllipsesComponent, FlexboxContainerComponent, FormComponent, HeaderComponent, OptionComponent, PhoneNumberFieldInputComponent, PickerInputComponent, SectionComponent, SymbolComponent, TextFieldInputComponent } from "@bowstring/surface";
+import { type CountryCode, getCountries, getCountryCallingCode, isPossiblePhoneNumber, parsePhoneNumberWithError, type PhoneNumber }                                                                                                                                                        from "libphonenumber-js";
+import { RouteComponent }                                                                                                                                                                                                                                                                   from "../../../../";
+import { type MessageDocument }                                                                                                                                                                                                                                                             from "../../../../../interfaces";
+import { MessageService }                                                                                                                                                                                                                                                                   from "../../../../../services";
 
 
 @Component(
@@ -22,6 +21,7 @@ import { MessageService }                                                       
       BoxComponent,
       ButtonComponent,
       DividerComponent,
+      EllipsesComponent,
       FlexboxContainerComponent,
       FormComponent,
       HeaderComponent,
@@ -82,7 +82,6 @@ export class ConnectRouteComponent
     );
   }
 
-  private readonly analytics: Analytics         = inject<Analytics>(Analytics);
   private readonly errorsService: ErrorsService = inject<ErrorsService>(ErrorsService);
   private readonly firestore: Firestore         = inject<Firestore>(Firestore);
 
@@ -93,7 +92,6 @@ export class ConnectRouteComponent
       countryCallingCodeB: string,
     ): number => parseInt(countryCallingCodeA) > parseInt(countryCallingCodeB) ? 1 : - 1,
   );
-  protected readonly ellipsesService: EllipsesService                                                                                                                                                                                                     = inject<EllipsesService>(EllipsesService);
   protected readonly messageFormGroup: FormGroup<{ "email": FormControl<string>, "message": FormControl<string>, "name": FormControl<string>, "phone": FormGroup<{ "countryCallingCode": FormControl<string>, "nationalNumber": FormControl<string> }> }> = new FormGroup<{ "email": FormControl<string>, "message": FormControl<string>, "name": FormControl<string>, "phone": FormGroup<{ "countryCallingCode": FormControl<string>, "nationalNumber": FormControl<string> }> }>(
     {
       email:   new FormControl<string>(
@@ -156,13 +154,6 @@ export class ConnectRouteComponent
   );
   protected readonly messagesFormWorking$: WritableSignal<boolean>                                                                                                                                                                                        = signal<boolean>(false);
   protected readonly messageService: MessageService                                                                                                                                                                                                       = inject<MessageService>(MessageService);
-
-  protected logClickMailEvent(): void {
-    logEvent<"click_mail">(
-      this.analytics,
-      "click_mail",
-    );
-  };
 
   protected async messageFormSubmit(): Promise<void> {
     const userId: string | undefined = this.authenticationService.user$()?.uid;
