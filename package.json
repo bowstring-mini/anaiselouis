@@ -1,6 +1,6 @@
 {
   "name":            "@anaiselouis/source",
-  "version":         "2026.0 Beta 104",
+  "version":         "2026.0 Beta 109",
   "homepage":        "https://anaiselouis.com",
   "author":          {
     "name":  "Gavin William Sawyer",
@@ -34,7 +34,7 @@
     "lodash":                            "4",
     "masonry-layout":                    "4",
     "rxjs":                              "7",
-    "uuid":                              "13",
+    "uuid":                              "14",
     "zone.js":                           "0.14"
   },
   "devDependencies": {
