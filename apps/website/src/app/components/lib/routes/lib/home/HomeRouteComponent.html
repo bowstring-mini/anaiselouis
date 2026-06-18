@@ -2,23 +2,47 @@
   ~ Copyright © 2026 Anaïse Louis. All rights reserved.
   -->
 
-<bowstring--scroll-stack #scrollStackComponent
-  [minimumAspectRatio]="0.75">
+<bowstring--scroll-stack [minimumAspectRatio]="0.79833984">
   <bowstring--image
     *bowstringScrollStackItem
-    [height]="400"
-    input="https://placehold.co/300x400"
-    [width]="300" />
+    [height]="2048"
+    input="/assets/019ed7f9-3ba4-7367-9838-26cf3b272651.webp"
+    [width]="1635" />
   <bowstring--image
     *bowstringScrollStackItem
-    [height]="400"
-    input="https://placehold.co/300x400"
-    [width]="300" />
+    [height]="2048"
+    input="/assets/019ed7f9-73c7-777d-87a4-9129e4feec37.webp"
+    [width]="1638" />
   <bowstring--image
     *bowstringScrollStackItem
-    [height]="400"
-    input="https://placehold.co/300x400"
-    [width]="300" />
+    [height]="2048"
+    input="/assets/019ed7f9-a2eb-76de-8505-2c6bb8ff6f87.webp"
+    [width]="1635" />
+  <bowstring--image
+    *bowstringScrollStackItem
+    [height]="1920"
+    input="/assets/019ed7f9-d1d3-749c-986d-55b6c1c0310d.webp"
+    [width]="1536" />
+  <bowstring--image
+    *bowstringScrollStackItem
+    [height]="1920"
+    input="/assets/019ed7f9-f3f2-7649-a797-bdc5e56c342f.webp"
+    [width]="1536" />
+  <bowstring--image
+    *bowstringScrollStackItem
+    [height]="1635"
+    input="/assets/019ed7fa-3266-738d-83d9-76911b256c77.webp"
+    [width]="1308" />
+  <bowstring--image
+    *bowstringScrollStackItem
+    [height]="2048"
+    input="/assets/019ed7fa-6833-7310-a7d1-5358f4e7270b.webp"
+    [width]="1638" />
+  <bowstring--image
+    *bowstringScrollStackItem
+    [height]="1920"
+    input="/assets/019ed7fa-92fb-774c-95ed-3607ce73cb7a.webp"
+    [width]="1536" />
 </bowstring--scroll-stack>
 
 <bowstring--aside *bowstringRouteAside id="aside" />
@@ -26,11 +50,8 @@
   <bowstring--box
     position="sticky"
     positionTop="var(--bowstring--root--padding-bottom)">
-    <bowstring--heading-group>
-      <bowstring--header>
-        <h4>Header {{ scrollStackComponent.itemIndex$() + 1 }}...</h4>
-      </bowstring--header>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores cumque et officiis? Aperiam commodi doloribus error est libero, odio repudiandae veritatis. Animi architecto distinctio dolorem eius incidunt. Aliquam omnis quia unde.</p>
+    <bowstring--heading-group styleFirstLetter>
+      <p>Anaïse is a multi-disciplinary artist and the founder of apparel brand After Awakening.</p>
     </bowstring--heading-group>
   </bowstring--box>
 </bowstring--inspector>
